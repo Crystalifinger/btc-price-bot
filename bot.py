@@ -1,4 +1,5 @@
 import os
+import asyncio
 import requests
 from telegram import Bot
 
@@ -18,13 +19,12 @@ def get_btc_price():
     response.raise_for_status()
 
     data = response.json()
-
     price = data["data"][0]["price"]
 
     return float(price)
 
 
-def main():
+async def main():
     price = get_btc_price()
 
     message = f"""₿ BTC Price
@@ -35,11 +35,11 @@ def main():
 
     bot = Bot(token=TOKEN)
 
-    bot.send_message(
+    await bot.send_message(
         chat_id=CHANNEL,
         text=message
     )
 
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())
