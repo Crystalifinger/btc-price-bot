@@ -7,10 +7,10 @@ CHANNEL = os.environ["CHANNEL"]
 
 
 def get_btc_price():
-    url = "https://pro-api.coinmarketcap.com/public-api/v2/simple/price"
+    url = "https://pro-api.coinmarketcap.com/public-api/v1/simple/price"
 
     params = {
-        "symbol": "BTC",
+        "ids": "1",
         "convert": "USD"
     }
 
@@ -19,7 +19,7 @@ def get_btc_price():
 
     data = response.json()
 
-    price = data["data"]["BTC"]["quote"]["USD"]["price"]
+    price = data["data"][0]["price"]
 
     return float(price)
 
